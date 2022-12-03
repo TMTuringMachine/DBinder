@@ -1,9 +1,12 @@
 import pkg from "moralis";
 const dp = pkg;
 const Moralis = dp.default;
-import Book from "../models/book.model.js";
-import mongoose from "mongoose";
-import fs from "fs";
+import Book from '../models/book.model.js';
+import mongoose from 'mongoose';
+import fs from "fs"
+import {client} from '../utils/ipfs-client.js'
+import axios from "axios"
+
 export const fileUploadController = async (req, res) => {
   const { title, description, DBCoins, Ether, author, genre, pageCount } =
     req.body;
@@ -55,4 +58,28 @@ export const fileUploadController = async (req, res) => {
   }
 };
 
+export const getBookFromIPFS = async(req,res)=>{
+  const {ipfsLink} = req.body;
+  const response = await axios.get(ipfsLink, {responseType: "arraybuffer"} )  
+  res.send({buffer:response.data})
+      // fs.appendFileSync('./out/file.pdf', Buffer.from(response.data));
+}
 
+export const getAllBooks = async(req,res)=>{
+  try {
+    const data = await Book.find();
+    res.status(200).send(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getBookData = async(req,res)=>{
+  const {ID} = req.params
+  try {
+    const data = await Book.findOne({_id:ID});
+    res.status(200).send(data);
+  } catch (error) {
+    console.log(error);
+  }
+}

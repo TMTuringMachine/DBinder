@@ -1,19 +1,25 @@
-import { Grid } from "@mui/material";
-import React from "react";
-import BookOverview from "../../components/BookOverview/BookOverview.component";
-import BookPreview from "../../components/BookPreview/BookPreview.component";
-import CustomButton from "../../components/CustomButton/CutomButton.component";
-import { CustomTextField } from "../../globals/global.styles";
-
+import { Grid } from '@mui/material';
+import React, { useContext, useEffect } from 'react';
+import BookOverview from '../../components/BookOverview/BookOverview.component';
+import BookPreview from '../../components/BookPreview/BookPreview.component';
+import CustomButton from '../../components/CustomButton/CutomButton.component';
+import { CustomTextField } from '../../globals/global.styles';
+import { BookContractContext } from '../../context/BookContractFunctions';
 const book = {
-  name: "The Alchemist",
-  author: "Paulo Coelho",
+  name: 'The Alchemist',
+  author: 'Paulo Coelho',
   reads: 453,
-  cover: "https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg",
+  cover: 'https://m.media-amazon.com/images/I/71aFt4+OTOL.jpg',
   price: 0.003,
 };
 
 const Home = () => {
+  const { currAccount, addCID, getCIDOfAuthor } =
+    useContext(BookContractContext);
+  useEffect(() => {
+    // addCID('0xdbfE8915E02863c93D1C8586b1f61a7C707c3f08', 'vv');
+    getCIDOfAuthor('0xdbfE8915E02863c93D1C8586b1f61a7C707c3f08');
+  }, []);
   return (
     <div className="w-screen h-screen overflow-y-auto flex gap-8">
       <div className="w-2/3">
@@ -25,13 +31,15 @@ const Home = () => {
             label="Search books by name, author name, genres and more !"
             fullWidth
           />
-          <CustomButton style={{ padding: "2px 25px", fontSize: "0.9em" }}>
+          <CustomButton style={{ padding: '2px 25px', fontSize: '0.9em' }}>
             SEARCH
           </CustomButton>
         </div>
         <div className="mt-5">
-          <h1 className="text-white text-2xl font-medium mb-3">Books for you</h1>
-          <Grid container spacing={4} >
+          <h1 className="text-white text-2xl font-medium mb-3">
+            Books for you
+          </h1>
+          <Grid container spacing={4}>
             {[...Array(16)].map((item) => (
               <Grid item md={3}>
                 <BookPreview book={book} />

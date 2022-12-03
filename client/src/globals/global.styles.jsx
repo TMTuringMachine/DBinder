@@ -4,6 +4,12 @@ export const CustomTextField = styled(TextField)(() => ({
   "& label.Mui-focused": {
     color: "rgba(255, 255, 255, 0.685)",
   },
+  "& input": {
+    color: "#fff",
+  },
+  "& textarea": {
+    color: "#fff",
+  },
   "& .MuiInput-underline:after": {
     borderBottomColor: "rgba(255, 255, 255, 0.685)",
   },

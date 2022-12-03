@@ -41,6 +41,16 @@ export default function Router() {
         },
       ],
     },
+    {
+      path: "/writer",
+      element: <WriterLayout />,
+      children: [
+        {
+          path: "home",
+          element: <WriterHome />,
+        },
+      ],
+    },
   ]);
 }
 
@@ -49,8 +59,16 @@ const MainLayout = Loadable(
   lazy(() => import("../layouts/mainLayout/mainLayout.component"))
 );
 
+const WriterLayout = Loadable(
+  lazy(() => import("../layouts/writerLayout/writerLayout.component"))
+);
+
 const Landing = Loadable(
   lazy(() => import("../pages/landing/landing.component"))
 );
 
 const Home = Loadable(lazy(() => import("../pages/home/home.component")));
+
+const WriterHome = Loadable(
+  lazy(() => import("../pages/home/writerHome.component"))
+);

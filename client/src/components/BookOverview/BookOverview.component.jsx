@@ -14,8 +14,8 @@ const BookOverview = ({ book, idx }) => {
           <h1 className="text-lg font-semibold text-white">#{idx} {book.name}</h1>
           <h1 className="text-sm text-text1">- by {book.author}</h1>
         </div>
-        <h1 className="text-lg text-secondary flex items-center">
-          {book.price} <Icon icon="mdi:ethereum" />
+        <h1 className="text-lg text-secondary flex items-center gap-2">
+          {book.price} <Icon icon="mingcute:copper-coin-fill" />
         </h1>
       </div>
     </div>

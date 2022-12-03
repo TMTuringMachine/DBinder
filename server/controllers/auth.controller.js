@@ -38,6 +38,7 @@ const createInitialUser = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email } = req.body;
+  console.log(email)
   const user = await User.findOne({ email });
   if (!user) {
     res.status(402).send({ ok: false, msg: "user doesn't exists" });
@@ -49,18 +50,18 @@ export const login = async (req, res) => {
     token: otp,
   });
   sendMail(
-    "turing machine",
+    "DBinder",
     "teamturingmachine@gmail.com",
     email,
-    "hahhah",
-    `<h1>this is your otp ${otp}</h1>`,
+    "Welcome Back To DBinder!",
+    `<h1>This is your OTP ${otp}</h1>`,
     "simple text"
   );
   res.status(200).send({ ok: true, msg: "otp sent successfully", data: user });
 };
 
 export const signup = async (req, res) => {
-  const { name, email, phone, gender } = req.body;
+  const { name, email, phone, author } = req.body;
   try {
     const userExist = await User.findOne({ email });
     if (userExist) {
@@ -72,8 +73,7 @@ export const signup = async (req, res) => {
       name,
       email,
       isVerified: false,
-      isFreelancer: false,
-      gender,
+      isAuthor: author,
       phone,
     });
 
@@ -83,16 +83,16 @@ export const signup = async (req, res) => {
       token: otp,
     });
     sendMail(
-      "turing machine",
+      "DBinder",
       "teamturingmachine@gmail.com",
       email,
-      "hahhah",
-      `<h1>this is your otp ${otp}</h1>`,
+      "Welcome to DBinder!",
+      `<h1>This is your OTP ${otp}</h1>`,
       "simple text"
     );
     res
       .status(200)
-      .send({ ok: true, msg: "otp sent successfully", data: user });
+      .send({ ok: true, msg: "OTP Sent Successfully", data: user });
   } catch (e) {
     console.log(e);
     res.status(400).send({ ok: false, msg: "some error occurred" });
@@ -109,7 +109,7 @@ export const validateOTP = async (req, res) => {
     });
     console.log(validOTP);
     if (!validOTP) {
-      res.send({ ok: false, msg: "not vald otp" });
+      res.send({ ok: false, msg: "OTP Invalid" });
       return;
     }
 
@@ -123,7 +123,7 @@ export const validateOTP = async (req, res) => {
       },
       process.env.JWT_PRIVATE_KEY,
       {
-        expiresIn: "14000000m",
+        expiresIn: "1000m",
       }
     );
     return res

@@ -31,6 +31,9 @@ const bookSchema = new Schema({
         type:Number,
     }
   },
+  pageCount:{
+    type:Number
+  },
   createdAt: {
     type: Date,
     default: Date.now,

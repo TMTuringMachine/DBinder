@@ -5,7 +5,7 @@ import Book from '../models/book.model.js';
 import mongoose from 'mongoose';
 import fs from "fs"
 export const fileUploadController = async (req, res) => {
-    const {title,description,DBCoins,Ether,author,genre} = req.body;
+    const {title,description,DBCoins,Ether,author,genre,pageCount} = req.body;
   const { filename } = req.file;
   try {
     const abi = [
@@ -33,6 +33,7 @@ export const fileUploadController = async (req, res) => {
                 Ether,
                 DBCoins
             },
+            pageCount,
             author:mongoose.Types.ObjectId(author),
             genre,
             ipfsURL:response?.toJSON()[0].path})

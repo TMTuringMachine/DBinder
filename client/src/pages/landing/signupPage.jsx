@@ -2,7 +2,7 @@ import { TextField, styled } from "@mui/material";
 import React, { useState } from "react";
 import StyledButton from "../../components/CustomButton/StyledButton";
 import axios from "../../utils/axiosInstance";
-
+import { useNavigate } from "react-router-dom";
 const CustomTextField = styled(TextField)(() => ({
   "& label.Mui-focused": {
     color: "rgba(255, 255, 255, 0.685)",
@@ -29,6 +29,7 @@ const CustomTextField = styled(TextField)(() => ({
 const SignupPage = ({ setMode }) => {
   const [role, setRole] = useState(null);
   const [data,setData] = useState()
+  const navigate = useNavigate()
 
   const handleChange = (e) => {
     setData({
@@ -42,6 +43,8 @@ const SignupPage = ({ setMode }) => {
       console.log(data);
       const response = await axios.post('/auth/signup',data);
       console.log(response);
+      localStorage.setItem("Token", response?.data?.data._id);
+      navigate(`/verify/${response?.data?.data._id}`);
   }
 
   return (

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
@@ -17,7 +17,7 @@ const UserSchema = new Schema({
   },
   isAuthor: {
     type: Boolean,
-    default:false
+    default: false,
   },
   gender: {
     type: String,
@@ -25,8 +25,24 @@ const UserSchema = new Schema({
   phone: {
     type: String,
   },
+  tokens: {
+    type: Number,
+  },
+  booksRead: [
+    {
+      bookId: {
+        type: mongoose.Types.ObjectId,
+      },
+      maxPage: {
+        type: Number,
+      },
+      pagesReadThisWeek: {
+        type: Number,
+      },
+    },
+  ],
 });
 
-const User = mongoose.model("USER", UserSchema);
+const User = mongoose.model('USER', UserSchema);
 
 export default User;

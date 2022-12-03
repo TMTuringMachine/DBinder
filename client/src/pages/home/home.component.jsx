@@ -14,12 +14,13 @@ const book = {
 };
 
 const Home = () => {
-  const { currAccount, addCID, getCIDOfAuthor } =
-    useContext(BookContractContext);
-  useEffect(() => {
-    // addCID('0xdbfE8915E02863c93D1C8586b1f61a7C707c3f08', 'vv');
-    getCIDOfAuthor('0xdbfE8915E02863c93D1C8586b1f61a7C707c3f08');
-  }, []);
+  // const { currAccount, addCID, getCIDOfAuthor } =
+  //   useContext(BookContractContext);
+  // useEffect(() => {
+  //   // addCID('0xdbfE8915E02863c93D1C8586b1f61a7C707c3f08', 'vv');
+  //   getCIDOfAuthor('0xdbfE8915E02863c93D1C8586b1f61a7C707c3f08');
+  // }, []);
+
   return (
     <div className="w-screen h-screen overflow-y-auto flex gap-8">
       <div className="w-2/3">

@@ -38,7 +38,7 @@ const createInitialUser = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email } = req.body;
-  console.log(email)
+  console.log(email);
   const user = await User.findOne({ email });
   if (!user) {
     res.status(402).send({ ok: false, msg: "user doesn't exists" });
@@ -133,4 +133,23 @@ export const validateOTP = async (req, res) => {
     console.log(e);
     res.status(400).send({ ok: false, msg: "some error occurred" });
   }
+};
+
+export const jwtVerify = async (req, res) => {
+  const token = req.headers.authorization;
+  console.log(`token: ${token}`);
+  if (!token) {
+    return res.status(400).send({ message: "Invalid Token" });
+  }
+
+  const decodeToken = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
+  if (decodeToken) {
+    const user = await User.findById(decodeToken._id).populate({
+      path: "cart",
+      populate: "items",
+    });
+    //   .populate("rentals")
+    return res.send({ message: "User Validated", user });
+  }
+  res.status(400).send({ message: "Invalid Token" });
 };

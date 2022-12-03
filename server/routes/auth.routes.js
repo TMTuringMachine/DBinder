@@ -1,9 +1,15 @@
-import express from 'express';
+import express from "express";
 const router = express.Router();
-import { signup, validateOTP, login } from '../controllers/auth.controller.js';
+import {
+  signup,
+  validateOTP,
+  login,
+  jwtVerify,
+} from "../controllers/auth.controller.js";
 
-router.post('/signup', signup);
-router.post('/login', login);
-router.post('/validateOTP/:id', validateOTP);
+router.post("/signup", signup);
+router.post("/login", login);
+router.post("/validateOTP/:id", validateOTP);
+router.get("/jwtVerify", jwtVerify);
 
 export default router;

@@ -38,25 +38,34 @@ const Landing = () => {
   const dispatch = useDispatch();
 
   const handleVerify = async () => {
-    const data = {
-      otp,
-    };
-    const response = await axios.post(`/auth/validateOTP/${id}`, data);
-    console.log(response);
-    if (response.status == 200 && response.data.ok == false) {
-      enqueueSnackbar(response.data?.msg || "Something went wrong!", {
-        variant: "error",
-      });
-      return;
-    }
-    if (response.data.ok) {
-      enqueueSnackbar("OTP validated successfully!");
-      setSession(response.data.token);
-      dispatch(loginSuccess({ user: response.data.user }));
-      if (response.data.user?.isAuthor) {
-        navigate("/writer/home");
-      } else {
-        navigate("/reader/home");
+    try {
+      const data = {
+        otp,
+      };
+      const response = await axios.post(`/auth/validateOTP/${id}`, data);
+      console.log(response);
+      if (response.status == 200 && response.data.ok == false) {
+        enqueueSnackbar(response.data?.msg || "Something went wrong!", {
+          variant: "error",
+        });
+        return;
+      }
+      if (response?.data?.token) {
+        enqueueSnackbar("OTP validated successfully!", { variant: "success" });
+        setSession(response.data.token);
+        dispatch(loginSuccess({ user: response.data.user }));
+        if (response.data.user?.isAuthor) {
+          navigate("/writer/home");
+        } else {
+          navigate("/reader/home");
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      if (!err?.response.data?.ok) {
+        enqueueSnackbar(err?.response?.data?.msg || "Someting went wrong!", {
+          variant: "error",
+        });
       }
     }
   };

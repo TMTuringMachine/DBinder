@@ -30,7 +30,7 @@ const SignupPage = ({ setMode }) => {
       navigate(`/verify/${response?.data?.data._id}`);
     } catch (err) {
       console.log(err);
-      if (err?.response.data.ok) {
+      if (!err?.response.data?.ok) {
         enqueueSnackbar(err?.response?.data?.msg || "Someting went wring!", {
           variant: "error",
         });

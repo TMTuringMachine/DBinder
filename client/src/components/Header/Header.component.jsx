@@ -1,9 +1,15 @@
 import React from "react";
 import { Icon } from "@iconify/react";
 import { Typography, Popover, Box, Avatar } from "@mui/material";
+import { setSession } from "../../utils/jwt";
+import { logoutSuccess } from "../../redux/slices/auth";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -16,12 +22,19 @@ const Header = () => {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
+  const handleLogout = () => {
+    setSession(null);
+    dispatch(logoutSuccess());
+    navigate("/");
+  };
+
   return (
     <div className="w-full h-16 px-10 flex items-center justify-between">
       <div className="flex items-center gap-24">
         <button
           className="text-xl font-bold text-white"
           onClick={() => {
+            navigate('/reader/home')
             // setMode("landing");
           }}
         >
@@ -109,14 +122,17 @@ const Header = () => {
               />
               <h1 className="text-white font-medium">User Settings</h1>
             </div>
-            <div className="flex gap-4 items-center bg-background3 p-2 rounded-lg cursor-pointer">
+            <button
+              className="flex gap-4 items-center bg-background3 p-2 rounded-lg cursor-pointer"
+              onClick={handleLogout}
+            >
               <Icon
                 icon="ri:logout-circle-line"
                 className="h-6 w-6"
                 color="#fff"
               />
               <h1 className="text-white font-medium">Logout</h1>
-            </div>
+            </button>
           </div>
         </Popover>
       </div>

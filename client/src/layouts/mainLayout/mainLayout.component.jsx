@@ -14,7 +14,7 @@ const MainLayout = () => {
       navigate("/");
     } else {
       if (pathname === "/") {
-        if (user.isAuthoe) {
+        if (user.isAuthor) {
           navigate("/writer/home");
         } else {
           navigate("/reader/home");

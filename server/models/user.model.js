@@ -15,8 +15,9 @@ const UserSchema = new Schema({
     type: Boolean,
     default: false,
   },
-  isFreelancer: {
+  isAuthor: {
     type: Boolean,
+    default:false
   },
   gender: {
     type: String,

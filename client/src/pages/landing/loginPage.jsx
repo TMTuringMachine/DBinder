@@ -1,32 +1,24 @@
 import { TextField, styled } from "@mui/material";
 import React, { useState } from "react";
 import StyledButton from "../../components/CustomButton/StyledButton";
+import axios from "../../utils/axiosInstance";
 
-const CustomTextField = styled(TextField)(() => ({
-    "& label.Mui-focused": {
-      color: "rgba(255, 255, 255, 0.685)",
-    },
-    "& .MuiInput-underline:after": {
-      borderBottomColor: "rgba(255, 255, 255, 0.685)",
-    },
-    "& .MuiInputLabel-root": {
-      color: "rgba(255, 255, 255, 0.685)",
-    },
-    "& .MuiOutlinedInput-root": {
-      "& fieldset": {
-        borderColor: "rgba(255, 255, 255, 0.685)",
-      },
-      "&:hover fieldset": {
-        borderColor: "rgba(255, 255, 255, 0.685)",
-      },
-      "&.Mui-focused fieldset": {
-        borderColor: "rgba(255, 255, 255, 0.685)",
-      },
-    },
-  }));
+import { CustomTextField } from "../../globals/global.styles";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = ({ setMode }) => {
   const [role, setRole] = useState("");
+  const [email,setEmail] = useState();
+  const navigate = useNavigate()
+
+  const handleLogin = async()=>{
+    const data = {
+      email
+    }
+    const response = await axios.post('/auth/login',data);
+    localStorage.setItem("Token", response?.data?.data._id);
+    navigate(`/verify/${response?.data?.data._id}`);
+  }
 
   return (
     <div className="px-10 mt-8 flex flex-col items-center">
@@ -34,9 +26,9 @@ const LoginPage = ({ setMode }) => {
         <h1 className="font-semibold text-3xl text-text1">
           Welcome back ! Login to your debinder account
         </h1>
-        <CustomTextField label="Email" fullWidth />
+        <CustomTextField onChange={(e)=>setEmail(e.target.value)} label="Email" name="email" fullWidth />
 
-        <StyledButton>LOG IN</StyledButton>
+        <StyledButton onClick={()=>handleLogin()} >LOG IN</StyledButton>
         <div className="text-text1">
           New to debinder?{" "}
           <button

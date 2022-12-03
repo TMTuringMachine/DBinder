@@ -70,7 +70,7 @@ const Header = () => {
             },
           }}
         >
-          <div className="w-80 h-52 flex flex-col gap-2 bg-background rounded-xl shadow-md p-2">
+          <div className="w-80 h-fit flex flex-col gap-2 bg-background rounded-xl shadow-md p-2">
             <div className="flex gap-4 items-center bg-background3 p-2 rounded-lg">
               <Avatar />
               <h1 className="text-white font-medium">Shivam Gavandi</h1>
@@ -87,13 +87,35 @@ const Header = () => {
                 </h1>
               </div>
               <div className="border-t-2 border-text1 w-full flex gap-2 justify-around pt-3">
-                <div className="text-[#FFD700] text-sm cursor-pointer">
+                <div className="text-[#FFD700] text-sm cursor-pointer flex items-center">
+                  <Icon
+                    icon="material-symbols:attach-money"
+                    color="#FFD700"
+                    className="w-5 h-5"
+                  />{" "}
                   BUY TOKENS
                 </div>
-                <div className="text-text1 text-sm cursor-pointer">
+                <div className="text-text1 text-sm cursor-pointer flex items-cente gap-1">
+                  <Icon icon="ph:wallet-fill" className="w-5 h-5" />
                   VIEW BALANCE
                 </div>
               </div>
+            </div>
+            <div className="flex gap-4 items-center bg-background3 p-2 rounded-lg cursor-pointer">
+              <Icon
+                icon="material-symbols:settings-rounded"
+                className="h-6 w-6"
+                color="#fff"
+              />
+              <h1 className="text-white font-medium">User Settings</h1>
+            </div>
+            <div className="flex gap-4 items-center bg-background3 p-2 rounded-lg cursor-pointer">
+              <Icon
+                icon="ri:logout-circle-line"
+                className="h-6 w-6"
+                color="#fff"
+              />
+              <h1 className="text-white font-medium">Logout</h1>
             </div>
           </div>
         </Popover>

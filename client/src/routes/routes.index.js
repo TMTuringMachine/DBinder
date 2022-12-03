@@ -32,6 +32,10 @@ export default function Router() {
       element: <Landing />,
     },
     {
+      path: "/verify/:id",
+      element: <VerifyOTP />,
+    },
+    {
       path: "/reader",
       element: <MainLayout />,
       children: [
@@ -71,4 +75,8 @@ const Home = Loadable(lazy(() => import("../pages/home/home.component")));
 
 const WriterHome = Loadable(
   lazy(() => import("../pages/home/writerHome.component"))
+);
+
+const VerifyOTP = Loadable(
+  lazy(() => import("../pages/landing/verify.component"))
 );

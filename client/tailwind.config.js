@@ -15,6 +15,7 @@ module.exports = {
         surface3: "rgba(255, 255, 255, 0.30)",
         color3: "#2FB2E1",
         color4: "#818181",
+        background2:"#2C325A"
       },
       boxShadow: {
         shadow1: "0px 8px 20px rgba(35, 35, 35, 0.1)",

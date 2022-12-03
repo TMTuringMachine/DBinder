@@ -100,11 +100,11 @@ const Landing = () => {
                 setMode("landing");
               }}
             >
-              debinder
+              dbinder
             </button>
             <div className="flex items-center gap-7">
               <div className="text-text1 font-normal">List your book</div>
-              <div className="text-text1 font-normal">View all books</div>
+              <div className="text-text1 font-normal">Bookstore</div>
             </div>
           </div>
           <div className="flex items-center gap-7">

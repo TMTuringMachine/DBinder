@@ -1,6 +1,6 @@
 <h1 align="center">DBinder</h1>
 
-<h2 align="center">🏆 1st Runner up of <a href="https://hacknyu.org/" target="_blank">HackNYU</a> Hackathon organized by New York University,<br/> sponsored by Meta, Walt Disney and Figma in the Education Track.</h2>
+DBinder aims to eliminate the middle man i.e. the publishers or any other online book services. These publishers have a complete control on the economy of the book market, they can regulate the stuff that authors write and they also take up a huge percentage of the profit. So we have basically created a decentralized marketplace for authors to list their work. And the best part about this is that the users pay only for the number of pages they read. This creates an awesome loop for both, the authors and the users, such that, the users are more willing to try out many more books than they usually would, because they only have to pay what they've read, and since there are more users per book, the authors get more readers than they usually would, and hence, more value.
 
 ## 💡 Inspiration
 

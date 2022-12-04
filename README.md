@@ -2,6 +2,9 @@
 
 DBinder aims to eliminate the middle man i.e. the publishers or any other online book services. These publishers have a complete control on the economy of the book market, they can regulate the stuff that authors write and they also take up a huge percentage of the profit. So we have basically created a decentralized marketplace for authors to list their work. And the best part about this is that the users pay only for the number of pages they read. This creates an awesome loop for both, the authors and the users, such that, the users are more willing to try out many more books than they usually would, because they only have to pay what they've read, and since there are more users per book, the authors get more readers than they usually would, and hence, more value.
 
+<img width="1440" alt="image" src="https://user-images.githubusercontent.com/79954118/205472716-a9f13d6d-c144-4d49-aaf3-6cf4f29ee3a4.png">
+
+
 ## 💡 Inspiration
 
 Handling attendance, awarding exam marks, and giving feedback for a whole class of numerous students is not an easy task. Similarly, sometimes it's easy to check and maintain the record of your children for the parents. FollowUp is a tool to help you manage your class if you are a teacher or check your child's performance if you are a parent.

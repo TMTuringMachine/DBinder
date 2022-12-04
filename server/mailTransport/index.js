@@ -1,10 +1,10 @@
-import nodemailer from "nodemailer";
+import nodemailer from 'nodemailer';
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: 'gmail',
   auth: {
-    user: "teamturingmachine@gmail.com",
-    pass: "yuohykguucovbncq",
+    user: 'teamturingmachine@gmail.com',
+    pass: 'yuohykguucovbncq',
   },
 });
 const sendMail = (name, fromAddress, toAddress, subject, mailContent, text) => {
@@ -20,7 +20,7 @@ const sendMail = (name, fromAddress, toAddress, subject, mailContent, text) => {
   };
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log("mail error");
+      console.log('mail error');
       console.log(error);
     }
   });

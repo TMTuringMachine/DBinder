@@ -64,7 +64,3 @@ We are using Figma for **prototyping and designing** the project. Figma makes it
 
 - A mobile app version
 
-## Resources
-
-- https://www.figma.com/file/pRJytUBaIwDjxaz8A6sng2/Frontend?node-id=0%3A1
-- https://hedera.com/blog/build-your-first-hcs-powered-web-app

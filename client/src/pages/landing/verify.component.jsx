@@ -15,6 +15,10 @@ import axios from "../../utils/axiosInstance";
 // import SignupPage from "./signupPage";
 // import LoginPage from "./loginPage";
 import { useNavigate, useParams } from "react-router-dom";
+import { useSnackbar } from "notistack";
+import { useDispatch } from "react-redux";
+import { setSession } from "../../utils/jwt";
+import { loginSuccess } from "../../redux/slices/auth";
 
 const Glass = styled(Box)(() => ({
   width: "100vw",
@@ -27,18 +31,44 @@ const Glass = styled(Box)(() => ({
 
 const Landing = () => {
   const [mode, setMode] = useState("landing");
-  const [otp,setOTP] = useState();
+  const [otp, setOTP] = useState();
   let { id } = useParams();
   const navigate = useNavigate();
+  const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
 
-  const handleVerify = async()=>{
-    const data = {
-      otp
+  const handleVerify = async () => {
+    try {
+      const data = {
+        otp,
+      };
+      const response = await axios.post(`/auth/validateOTP/${id}`, data);
+      console.log(response);
+      if (response.status == 200 && response.data.ok == false) {
+        enqueueSnackbar(response.data?.msg || "Something went wrong!", {
+          variant: "error",
+        });
+        return;
+      }
+      if (response?.data?.token) {
+        enqueueSnackbar("OTP validated successfully!", { variant: "success" });
+        setSession(response.data.token);
+        dispatch(loginSuccess({ user: response.data.user }));
+        if (response.data.user?.isAuthor) {
+          navigate("/writer/home");
+        } else {
+          navigate("/reader/home");
+        }
+      }
+    } catch (err) {
+      console.log(err);
+      if (!err?.response.data?.ok) {
+        enqueueSnackbar(err?.response?.data?.msg || "Someting went wrong!", {
+          variant: "error",
+        });
+      }
     }
-    const response = await axios.post(`/auth/validateOTP/${id}`,data)
-    console.log(response);
-    navigate('/reader/home')
-  }
+  };
 
   //   let content;
 
@@ -145,9 +175,14 @@ const Landing = () => {
             <h1 className="font-semibold text-2xl text-text1">
               Please enter the OTP sent to your email to verify yourself!
             </h1>
-            <CustomTextField onChange={(e)=>setOTP(e.target.value)} label="Enter OTP" name="otp" fullWidth />
+            <CustomTextField
+              onChange={(e) => setOTP(e.target.value)}
+              label="Enter OTP"
+              name="otp"
+              fullWidth
+            />
 
-            <StyledButton onClick={()=>handleVerify()}>VERIFY</StyledButton>
+            <StyledButton onClick={() => handleVerify()}>VERIFY</StyledButton>
             {/* <div className="text-text1">
               New to debinder?{" "}
               <button

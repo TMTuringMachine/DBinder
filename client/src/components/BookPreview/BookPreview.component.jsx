@@ -4,7 +4,12 @@ import { useNavigate } from 'react-router-dom';
 const BookPreview = ({ book, image }) => {
   const navigate = useNavigate();
   return (
-    <div className="w-full h-80 flex flex-col gap-1 cursor-pointer hover:shadow-2xl rounded-lg ">
+    <button
+      className="w-full h-80 flex flex-col gap-1 cursor-pointer hover:shadow-2xl rounded-lg "
+      onClick={() => {
+        navigate("/reader/books/rselfkmwleks");
+      }}
+    >
       <div className="w-full h-4/5 group overflow-hidden rounded-lg">
         <img
           src={image}
@@ -24,7 +29,7 @@ const BookPreview = ({ book, image }) => {
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

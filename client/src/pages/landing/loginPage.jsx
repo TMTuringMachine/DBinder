@@ -16,7 +16,7 @@ const LoginPage = ({ setMode }) => {
       email
     }
     const response = await axios.post('/auth/login',data);
-    localStorage.setItem("Token", response?.data?.data._id);
+    // localStorage.setItem("accessToken", response?.data?.data._id);
     navigate(`/verify/${response?.data?.data._id}`);
   }
 

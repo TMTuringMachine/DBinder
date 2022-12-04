@@ -9,7 +9,7 @@ import {
 } from '../controllers/book.controller.js'
 
 router.post('/upload',fileUpload.single('book'),fileUploadController);
-router.get('/get',getBookFromIPFS);
+router.post('/get',getBookFromIPFS);
 router.get('/getAll',getAllBooks)
 router.get('/get/:ID',getBookData)
 

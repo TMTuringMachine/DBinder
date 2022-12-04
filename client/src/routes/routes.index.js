@@ -47,6 +47,10 @@ export default function Router() {
           path: "books/:id",
           element: <SingleBook />,
         },
+        {
+          path:"bookView/:bookID",
+          element:<BookView/>
+        }
       ],
     },
     {
@@ -87,4 +91,8 @@ const VerifyOTP = Loadable(
 
 const SingleBook = Loadable(
   lazy(() => import("../pages/book/SingleBook.component"))
+);
+
+const BookView = Loadable(
+  lazy(() => import("../pages/book/Book.view"))
 );

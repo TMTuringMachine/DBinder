@@ -1,10 +1,10 @@
 // import handleAsync from '../utils/handleAsync.js';
-import User from "../models/user.model.js";
-import jwt from "jsonwebtoken";
+import User from '../models/user.model.js';
+import jwt from 'jsonwebtoken';
 // import ExpressError from '../utils/ExpressError.js';
-import Token from "../models/token.model.js";
-import sendMail from "../mailTransport/index.js";
-import generateOTP from "../utils/generateOtp.js";
+import Token from '../models/token.model.js';
+import sendMail from '../mailTransport/index.js';
+import generateOTP from '../utils/generateOtp.js';
 
 const createInitialUser = async (req, res) => {
   const { name, email, phone } = req.body;
@@ -14,7 +14,7 @@ const createInitialUser = async (req, res) => {
   if (userExist) {
     return res
       .status(400)
-      .send({ message: "User with this email already exist" });
+      .send({ message: 'User with this email already exist' });
   }
 
   const user = new User({
@@ -33,7 +33,7 @@ const createInitialUser = async (req, res) => {
 
   await token.save();
 
-  return res.status(200).send({ message: "Account created successfully!" });
+  return res.status(200).send({ message: 'Account created successfully!' });
 };
 
 export const login = async (req, res) => {
@@ -50,14 +50,14 @@ export const login = async (req, res) => {
     token: otp,
   });
   sendMail(
-    "DBinder",
-    "teamturingmachine@gmail.com",
+    'DBinder',
+    'teamturingmachine@gmail.com',
     email,
-    "Welcome Back To DBinder!",
+    'Welcome Back To DBinder!',
     `<h1>This is your OTP ${otp}</h1>`,
-    "simple text"
+    'simple text'
   );
-  res.status(200).send({ ok: true, msg: "otp sent successfully", data: user });
+  res.status(200).send({ ok: true, msg: 'otp sent successfully', data: user });
 };
 
 export const signup = async (req, res) => {
@@ -65,7 +65,7 @@ export const signup = async (req, res) => {
   try {
     const userExist = await User.findOne({ email });
     if (userExist) {
-      res.status(402).send({ ok: false, msg: "user already exists" });
+      res.status(402).send({ ok: false, msg: 'user already exists' });
       return;
     }
 
@@ -83,19 +83,19 @@ export const signup = async (req, res) => {
       token: otp,
     });
     sendMail(
-      "DBinder",
-      "teamturingmachine@gmail.com",
+      'DBinder',
+      'teamturingmachine@gmail.com',
       email,
-      "Welcome to DBinder!",
+      'Welcome to DBinder!',
       `<h1>This is your OTP ${otp}</h1>`,
-      "simple text"
+      'simple text'
     );
     res
       .status(200)
-      .send({ ok: true, msg: "OTP Sent Successfully", data: user });
+      .send({ ok: true, msg: 'OTP Sent Successfully', data: user });
   } catch (e) {
     console.log(e);
-    res.status(400).send({ ok: false, msg: "some error occurred" });
+    res.status(400).send({ ok: false, msg: 'some error occurred' });
   }
 };
 
@@ -109,7 +109,7 @@ export const validateOTP = async (req, res) => {
     });
     console.log(validOTP, "jejejejejeje");
     if (!validOTP) {
-      res.send({ ok: false, msg: "OTP Invalid" });
+      res.send({ ok: false, msg: 'OTP Invalid' });
       return;
     }
 
@@ -123,15 +123,15 @@ export const validateOTP = async (req, res) => {
       },
       process.env.JWT_PRIVATE_KEY,
       {
-        expiresIn: "1000m",
+        expiresIn: '1000m',
       }
     );
     return res
       .status(200)
-      .json({ message: "Login / Signup Successfull!", token, user });
+      .json({ message: 'Login / Signup Successfull!', token, user });
   } catch (e) {
     console.log(e);
-    res.status(400).send({ ok: false, msg: "some error occurred" });
+    res.status(400).send({ ok: false, msg: 'some error occurred' });
   }
 };
 

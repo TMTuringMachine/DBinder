@@ -1,36 +1,36 @@
-import React, { useState, useEffect } from "react";
-import Lottie from "react-lottie";
-import BubbleLottie from "../../assets/lotties/bubble.json";
-import BubbleLottie1 from "../../assets/lotties/bubble1.json";
-import BubbleLottie2 from "../../assets/lotties/bubble2.json";
-import BubbleLottie3 from "../../assets/lotties/bubble3.json";
+import React, { useState, useEffect } from 'react';
+import Lottie from 'react-lottie';
+import BubbleLottie from '../../assets/lotties/bubble.json';
+import BubbleLottie1 from '../../assets/lotties/bubble1.json';
+import BubbleLottie2 from '../../assets/lotties/bubble2.json';
+import BubbleLottie3 from '../../assets/lotties/bubble3.json';
 
-import { ReactComponent as LandingImage } from "../../assets/images/landing.svg";
-import { CustomTextField } from "../../globals/global.styles";
-import { Box, styled } from "@mui/material";
+import { ReactComponent as LandingImage } from '../../assets/images/landing.svg';
+import { CustomTextField } from '../../globals/global.styles';
+import { Box, styled } from '@mui/material';
 // import CustomButton from "../../components/CustomButton/CustomButton.component";
-import StyledButton from "../../components/CustomButton/StyledButton";
-import axios from "../../utils/axiosInstance";
+import StyledButton from '../../components/CustomButton/StyledButton';
+import axios from '../../utils/axiosInstance';
 // import LandingPage from "./landingPage";
 // import SignupPage from "./signupPage";
 // import LoginPage from "./loginPage";
-import { useNavigate, useParams } from "react-router-dom";
-import { useSnackbar } from "notistack";
-import { useDispatch } from "react-redux";
-import { setSession } from "../../utils/jwt";
-import { loginSuccess } from "../../redux/slices/auth";
+import { useNavigate, useParams } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
+import { useDispatch } from 'react-redux';
+import { setSession } from '../../utils/jwt';
+import { loginSuccess } from '../../redux/slices/auth';
 
 const Glass = styled(Box)(() => ({
-  width: "100vw",
-  height: "100vh",
-  backgroundColor: "rgba(255, 255, 255, 0.04)",
-  backdropFilter: "blur(20px)",
-  position: "absolute",
-  top: "0px",
+  width: '100vw',
+  height: '100vh',
+  backgroundColor: 'rgba(255, 255, 255, 0.04)',
+  backdropFilter: 'blur(20px)',
+  position: 'absolute',
+  top: '0px',
 }));
 
 const Landing = () => {
-  const [mode, setMode] = useState("landing");
+  const [mode, setMode] = useState('landing');
   const [otp, setOTP] = useState();
   let { id } = useParams();
   const navigate = useNavigate();
@@ -45,26 +45,27 @@ const Landing = () => {
       const response = await axios.post(`/auth/validateOTP/${id}`, data);
       console.log(response);
       if (response.status == 200 && response.data.ok == false) {
-        enqueueSnackbar(response.data?.msg || "Something went wrong!", {
-          variant: "error",
+        enqueueSnackbar(response.data?.msg || 'Something went wrong!', {
+          variant: 'error',
         });
         return;
       }
       if (response?.data?.token) {
-        enqueueSnackbar("OTP validated successfully!", { variant: "success" });
+        enqueueSnackbar('OTP validated successfully!', { variant: 'success' });
         setSession(response.data.token);
         dispatch(loginSuccess({ user: response.data.user }));
-        if (response.data.user?.isAuthor) {
-          navigate("/writer/home");
+        console.log(response.data.user, 'userrrr');
+        if (response?.data?.user?.isAuthor) {
+          navigate('/writer/home');
         } else {
-          navigate("/reader/home");
+          navigate('/reader/home');
         }
       }
     } catch (err) {
       console.log(err);
       if (!err?.response.data?.ok) {
-        enqueueSnackbar(err?.response?.data?.msg || "Someting went wrong!", {
-          variant: "error",
+        enqueueSnackbar(err?.response?.data?.msg || 'Someting went wrong!', {
+          variant: 'error',
         });
       }
     }
@@ -86,7 +87,7 @@ const Landing = () => {
     animationData: BubbleLottie1,
 
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
   const defaultOptions2 = {
@@ -95,7 +96,7 @@ const Landing = () => {
     animationData: BubbleLottie2,
 
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
   const defaultOptions3 = {
@@ -104,7 +105,7 @@ const Landing = () => {
     animationData: BubbleLottie3,
 
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
   return (
@@ -141,7 +142,7 @@ const Landing = () => {
             <button
               className="text-xl font-bold text-white"
               onClick={() => {
-                setMode("landing");
+                setMode('landing');
               }}
             >
               dbinder
@@ -155,7 +156,7 @@ const Landing = () => {
             <button
               className="text-text1 font-semibold"
               onClick={() => {
-                setMode("login");
+                setMode('login');
               }}
             >
               Login
@@ -163,7 +164,7 @@ const Landing = () => {
             <button
               className="text-text1 font-semibold"
               onClick={() => {
-                setMode("signup");
+                setMode('signup');
               }}
             >
               Signup

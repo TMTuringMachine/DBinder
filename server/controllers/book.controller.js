@@ -1,4 +1,4 @@
-import pkg from "moralis";
+import pkg from 'moralis';
 const dp = pkg;
 const Moralis = dp.default;
 import Book from '../models/book.model.js';
@@ -12,10 +12,7 @@ import axios from 'axios';
 export const fileUploadController = async (req, res) => {
   const { title, description, DBCoins, Ether, author, genre, pageCount } =
     req.body;
-<<<<<<< HEAD
-=======
   console.log(req.body);
->>>>>>> 198e6867a19fc3010da681586b4b958a8bc73776
   const { filename } = req.file;
   try {
     const abi = [
@@ -34,33 +31,13 @@ export const fileUploadController = async (req, res) => {
     const response = await Moralis.EvmApi.ipfs.uploadFolder({
       abi,
     });
+    console.log(response, 'responseee');
 
     if (response) {
       const newBook = new Book({
         title,
         description,
         price: {
-<<<<<<< HEAD
-          Ether,
-          DBCoins,
-        },
-        pageCount,
-        author: mongoose.Types.ObjectId(author),
-        genre,
-        ipfsURL: response?.toJSON()[0].path,
-      });
-
-      const saved = await newBook.save();
-      if (saved)
-        res
-          .status(200)
-          .send({
-            message: "Uploaded to IPFS",
-            URL: response?.toJSON()[0].path,
-          });
-      else res.status(400).send({ message: "Something Went Wrong" });
-    } else res.status(400).send({ message: "Something Went Wrong" });
-=======
           DBCoins: parseInt(DBCoins),
           Ether: parseInt(Ether),
         },
@@ -71,14 +48,14 @@ export const fileUploadController = async (req, res) => {
       });
 
       const saved = await newBook.save();
+      console.log(saved, 'svaaccedd');
       if (saved) {
-        res.status(200).send({
+        return res.status(200).send({
           message: 'Uploaded to IPFS',
           URL: response?.toJSON()[0].path,
         });
-      } else res.status(400).send({ message: 'Something Went Wrong' });
-    } else res.status(400).send({ message: 'Something Went Wrong' });
->>>>>>> 198e6867a19fc3010da681586b4b958a8bc73776
+      } else return res.status(400).send({ message: 'Something Went Wrong' });
+    } else return res.status(400).send({ message: 'Something Went Wrong' });
   } catch (error) {
     console.log(error);
   }
@@ -116,7 +93,6 @@ export const updateBookPage = async (req, res) => {
     .send({ ok: true, msg: 'user udated successfully', data: user });
 };
 
-
 export const getBookFromIPFS = async (req, res) => {
   const { ipfsLink } = req.body;
   const response = await axios.get(ipfsLink, { responseType: 'arraybuffer' });
@@ -141,8 +117,14 @@ export const getBookData = async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-<<<<<<< HEAD
-}
-=======
 };
->>>>>>> 198e6867a19fc3010da681586b4b958a8bc73776
+
+export const getBooksOfAuthor = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const data = await Book.find({ author: id });
+    res.status(200).send(data);
+  } catch (e) {
+    console.log(e);
+  }
+};

@@ -5,9 +5,9 @@ const BookPreview = ({ book, image }) => {
   const navigate = useNavigate();
   return (
     <button
-      className="w-full h-80 flex flex-col gap-1 cursor-pointer hover:shadow-2xl rounded-lg "
+      className="w-80px m-2 h-80 flex flex-col gap-1 cursor-pointer hover:shadow-2xl rounded-lg "
       onClick={() => {
-        navigate("/reader/books/rselfkmwleks");
+        navigate('/reader/books/rselfkmwleks');
       }}
     >
       <div className="w-full h-4/5 group overflow-hidden rounded-lg">

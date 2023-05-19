@@ -107,7 +107,7 @@ export const validateOTP = async (req, res) => {
       userId,
       token: otp,
     });
-    console.log(validOTP, "jejejejejeje");
+    console.log(validOTP, 'jejejejejeje');
     if (!validOTP) {
       res.send({ ok: false, msg: 'OTP Invalid' });
       return;
@@ -139,14 +139,14 @@ export const jwtVerify = async (req, res) => {
   const token = req.headers.authorization;
   console.log(`token: ${token}`);
   if (!token) {
-    return res.status(400).send({ message: "Invalid Token" });
+    return res.status(400).send({ message: 'Invalid Token' });
   }
 
   const decodeToken = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
   if (decodeToken) {
     const user = await User.findById(decodeToken._id);
     //   .populate("rentals")
-    return res.send({ message: "User Validated", user });
+    return res.send({ message: 'User Validated', user });
   }
-  res.status(400).send({ message: "Invalid Token" });
+  res.status(400).send({ message: 'Invalid Token' });
 };

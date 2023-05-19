@@ -20,7 +20,7 @@ import { CustomTextField } from '../../globals/global.styles';
 import pdfParser from '../../hooks/usePDFs';
 import { useContext, useCallback, useState } from 'react';
 import { BookContractContext } from '../../context/BookContractFunctions';
-
+import { useSelector } from 'react-redux';
 const ListBookModal = ({ state, toggleModal }) => {
   const { enqueueSnackbar } = useSnackbar();
   const [data, setData] = useState({
@@ -33,6 +33,8 @@ const ListBookModal = ({ state, toggleModal }) => {
   });
   const [imageToUpload, setImageToUpload] = useState(null);
   const { currAccount, addCID } = useContext(BookContractContext);
+  const { user, isLoggedIn } = useSelector((state) => state.auth);
+
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -42,9 +44,9 @@ const ListBookModal = ({ state, toggleModal }) => {
     let formData = new FormData();
     const numberPages = pdfParser(imageToUpload);
     formData.append('title', data.title);
-    formData.append('author', '638b9a2e408f001b799778e1');
+    formData.append('author', user._id);
     formData.append('Ether', data.Ether);
-    formData.append('DBCoins', data.Ether / 10000);
+    formData.append('DBCoins', data.Ether / 10000.0);
     formData.append('pageCount', numberPages);
     formData.append('genre', data.genre);
     formData.append('book', imageToUpload);
@@ -54,8 +56,10 @@ const ListBookModal = ({ state, toggleModal }) => {
         'Content-Type': 'multipart/form-data',
       },
     });
+    console.log(res, 'respnssee');
     const url = res?.data?.URL;
-    await addCID(currAccount, url);
+    console.log(currAccount);
+    // await addCID(currAccount, url);
     toggleModal();
     enqueueSnackbar('Book added successfully!', { variant: 'success' });
   };

@@ -1,10 +1,10 @@
-import React from "react";
-import { Icon } from "@iconify/react";
-import { Typography, Popover, Box, Avatar } from "@mui/material";
-import { setSession } from "../../utils/jwt";
-import { logoutSuccess } from "../../redux/slices/auth";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React from 'react';
+import { Icon } from '@iconify/react';
+import { Typography, Popover, Box, Avatar } from '@mui/material';
+import { setSession } from '../../utils/jwt';
+import { logoutSuccess } from '../../redux/slices/auth';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -20,12 +20,12 @@ const Header = () => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const id = open ? 'simple-popover' : undefined;
 
   const handleLogout = () => {
     setSession(null);
     dispatch(logoutSuccess());
-    navigate("/");
+    navigate('/');
   };
 
   return (
@@ -34,7 +34,7 @@ const Header = () => {
         <button
           className="text-xl font-bold text-white"
           onClick={() => {
-            navigate('/reader/home')
+            navigate('/reader/home');
             // setMode("landing");
           }}
         >
@@ -68,25 +68,25 @@ const Header = () => {
           anchorEl={anchorEl}
           onClose={handleClose}
           anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
+            vertical: 'bottom',
+            horizontal: 'left',
           }}
           transformOrigin={{
-            vertical: "top",
-            horizontal: "center",
+            vertical: 'top',
+            horizontal: 'center',
           }}
           sx={{
-            marginTop: "20px",
-            marginRight: "50px",
-            "& .MuiPopover-paper": {
-              backgroundColor: "transparent",
+            marginTop: '20px',
+            marginRight: '50px',
+            '& .MuiPopover-paper': {
+              backgroundColor: 'transparent',
             },
           }}
         >
           <div className="w-80 h-fit flex flex-col gap-2 bg-background rounded-xl shadow-md p-2">
             <div className="flex gap-4 items-center bg-background3 p-2 rounded-lg">
               <Avatar />
-              <h1 className="text-white font-medium">Shivam Gavandi</h1>
+              <h1 className="text-white font-medium">Aryan Shinde</h1>
             </div>
             <div className="bg-background3 p-2 rounded-lg flex flex-col gap-2 items-center">
               <div className="w-full flex items-center gap-3">
@@ -94,7 +94,7 @@ const Header = () => {
                   icon="ri:copper-coin-fill"
                   className="w-8 h-8"
                   color="#00FFED"
-                />{" "}
+                />{' '}
                 <h1 className="text-white font-semibold text-lg">
                   233 <span className="font-normal text-sm">debi tokens</span>
                 </h1>
@@ -105,7 +105,7 @@ const Header = () => {
                     icon="material-symbols:attach-money"
                     color="#FFD700"
                     className="w-5 h-5"
-                  />{" "}
+                  />{' '}
                   BUY TOKENS
                 </div>
                 <div className="text-text1 text-sm cursor-pointer flex items-cente gap-1">

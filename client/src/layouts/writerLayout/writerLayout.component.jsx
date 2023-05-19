@@ -1,36 +1,38 @@
-import React, { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
-import Header from "../../components/Header/Header.component";
-import WriterHeader from "../../components/WriterHeader/writerHeader.component";
+import React, { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
+import Header from '../../components/Header/Header.component';
+import WriterHeader from '../../components/WriterHeader/writerHeader.component';
 
 const WriterLayout = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { user, isLoggedIn } = useSelector((state) => state.auth);
 
-  
-
   React.useEffect(() => {
+    console.log(isLoggedIn, 'isLoggedd??');
     if (!isLoggedIn) {
-      navigate("/");
+      navigate('/');
     } else {
-      if (pathname === "/") {
-        if (user.isAuthor) {
-          navigate("/writer/home");
-        } else {
-          navigate("/reader/home");
-        }
+      console.log(pathname, 'pathnamme');
+      // if (pathname === '/') {
+      if (user.isAuthor) {
+        navigate('/writer/home');
       } else {
-        navigate(pathname);
+        navigate('/reader/home');
       }
+      // }
+      // } else {
+      //   navigate(pathname);
+      // }
     }
   }, [isLoggedIn]);
 
   useEffect(() => {
-    if (!user || user.isAuthor) {
-      navigate("/");
+    console.log(user, 'userrr');
+    if (!user || !user.isAuthor) {
+      navigate('/');
     }
   }, [user]);
   return (

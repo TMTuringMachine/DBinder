@@ -1,57 +1,61 @@
-import React, { useState, useEffect } from "react";
-import Lottie from "react-lottie";
-import BubbleLottie from "../../assets/lotties/bubble.json";
-import BubbleLottie1 from "../../assets/lotties/bubble1.json";
-import BubbleLottie2 from "../../assets/lotties/bubble2.json";
-import BubbleLottie3 from "../../assets/lotties/bubble3.json";
+import React, { useState, useEffect, useContext } from 'react';
+import Lottie from 'react-lottie';
+import BubbleLottie from '../../assets/lotties/bubble.json';
+import BubbleLottie1 from '../../assets/lotties/bubble1.json';
+import BubbleLottie2 from '../../assets/lotties/bubble2.json';
+import BubbleLottie3 from '../../assets/lotties/bubble3.json';
 
-import { ReactComponent as LandingImage } from "../../assets/images/landing.svg";
+import { BookContractContext } from '../../context/BookContractFunctions';
 
-import { Box, styled } from "@mui/material";
+import { ReactComponent as LandingImage } from '../../assets/images/landing.svg';
+
+import { Box, styled } from '@mui/material';
 // import CustomButton from "../../components/CustomButton/CustomButton.component";
 
-import LandingPage from "./landingPage";
-import SignupPage from "./signupPage";
-import LoginPage from "./loginPage";
+import LandingPage from './landingPage';
+import SignupPage from './signupPage';
+import LoginPage from './loginPage';
 
 const Glass = styled(Box)(() => ({
-  width: "100vw",
-  height: "100vh",
-  backgroundColor: "rgba(255, 255, 255, 0.04)",
-  backdropFilter: "blur(20px)",
-  position: "absolute",
-  top: "0px",
+  width: '100vw',
+  height: '100vh',
+  backgroundColor: 'rgba(255, 255, 255, 0.04)',
+  backdropFilter: 'blur(20px)',
+  position: 'absolute',
+  top: '0px',
 }));
 
 const Landing = () => {
-  const [mode, setMode] = useState("landing");
-
+  const [mode, setMode] = useState('landing');
+  const { connectWallet } = useContext(BookContractContext);
   let content;
 
-  if (mode == "landing") {
+  if (mode == 'landing') {
     content = <LandingPage setMode={setMode} />;
-  } else if (mode == "signup") {
+  } else if (mode == 'signup') {
     content = <SignupPage setMode={setMode} />;
-  } else if (mode == "login") {
+  } else if (mode == 'login') {
     content = <LoginPage setMode={setMode} />;
   }
-
+  useEffect(() => {
+    connectWallet();
+  }, []);
   const defaultOptions1 = {
     loop: true,
     autoplay: true,
     animationData: BubbleLottie1,
 
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
   const defaultOptions2 = {
     loop: true,
     autoplay: true,
     animationData: BubbleLottie2,
-    
+
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
   const defaultOptions3 = {
@@ -60,7 +64,7 @@ const Landing = () => {
     animationData: BubbleLottie3,
 
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
+      preserveAspectRatio: 'xMidYMid slice',
     },
   };
   return (
@@ -97,7 +101,7 @@ const Landing = () => {
             <button
               className="text-xl font-bold text-white"
               onClick={() => {
-                setMode("landing");
+                setMode('landing');
               }}
             >
               dbinder
@@ -111,7 +115,7 @@ const Landing = () => {
             <button
               className="text-text1 font-semibold"
               onClick={() => {
-                setMode("login");
+                setMode('login');
               }}
             >
               Login
@@ -119,7 +123,7 @@ const Landing = () => {
             <button
               className="text-text1 font-semibold"
               onClick={() => {
-                setMode("signup");
+                setMode('signup');
               }}
             >
               Signup

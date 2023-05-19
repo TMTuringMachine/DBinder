@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
-import Header from "../../components/Header/Header.component";
+import React, { useState, useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useNavigate, useLocation } from 'react-router-dom';
+import Header from '../../components/Header/Header.component';
 
 const MainLayout = () => {
   const navigate = useNavigate();
@@ -11,13 +11,13 @@ const MainLayout = () => {
 
   React.useEffect(() => {
     if (!isLoggedIn) {
-      navigate("/");
+      navigate('/');
     } else {
-      if (pathname === "/") {
+      if (pathname === '/') {
         if (user.isAuthor) {
-          navigate("/writer/home");
+          navigate('/writer/home');
         } else {
-          navigate("/reader/home");
+          navigate('/reader/home');
         }
       } else {
         navigate(pathname);
@@ -26,8 +26,8 @@ const MainLayout = () => {
   }, [isLoggedIn]);
 
   useEffect(() => {
-    if (!user || user.isAuthor) {
-      navigate("/");
+    if (!user) {
+      navigate('/');
     }
   }, [user]);
   return (

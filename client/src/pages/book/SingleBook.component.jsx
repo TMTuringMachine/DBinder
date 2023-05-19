@@ -87,12 +87,14 @@ const SingleBook = () => {
             <span className="text-sm">(5 tokens per page)</span>
           </div>
         </h1>
-        <StyledButton
-          style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
-        >
-          <Icon icon="material-symbols:play-circle" />
-          START READING{' '}
-        </StyledButton>
+        <a href={book.ipfsURL} target="_blank">
+          <StyledButton
+            style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
+          >
+            <Icon icon="material-symbols:play-circle" />
+            START READING{' '}
+          </StyledButton>
+        </a>
         <div className="w-3/4 h-fit bg-background3 mt-8 p-3 text-white rounded-xl">
           <h1 className="text-lg font-medium">Reviews</h1>
           <div className="w-full flex flex-col gap-1">

@@ -5,9 +5,9 @@ const BookPreview = ({ book, image }) => {
   const navigate = useNavigate();
   return (
     <button
-      className="w-80px m-2 h-80 flex flex-col gap-1 cursor-pointer hover:shadow-2xl rounded-lg "
+      className="w-80px m-4 h-80 flex flex-col gap-1 cursor-pointer hover:shadow-2xl rounded-lg "
       onClick={() => {
-        navigate('/reader/books/rselfkmwleks');
+        navigate(`/reader/books/${book._id}`);
       }}
     >
       <div className="w-full h-4/5 group overflow-hidden rounded-lg">
@@ -21,7 +21,7 @@ const BookPreview = ({ book, image }) => {
         <h1 className="text-lg font-semibold text-white">{book.title}</h1>
         <div className="flex w-full justify-between">
           <h1 className="text-sm font-medium text-text1 w-5 text-truncate">
-            - by {book.author}
+            - by {book.author.slice(0, 5) + '...' + book.author.slice(15)}
           </h1>
           <div className="flex items-center gap-2 text-text1">
             {book.price.Ether + ' (' + book.price.DBCoins + ' DB coins)'}{' '}
